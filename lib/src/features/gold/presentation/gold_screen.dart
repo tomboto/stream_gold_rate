@@ -28,7 +28,8 @@ class GoldScreen extends StatelessWidget {
                             snapshot.connectionState == ConnectionState.done ||
                         snapshot.connectionState == ConnectionState.active) {
                       return Text(
-                        NumberFormat.simpleCurrency(locale: 'de_DE')
+                        NumberFormat.simpleCurrency(
+                                decimalDigits: 3, locale: 'de_DE')
                             .format(snapshot.data),
                         style: Theme.of(context)
                             .textTheme
