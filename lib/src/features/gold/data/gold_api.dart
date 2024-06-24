@@ -14,7 +14,7 @@ Stream<double> getGoldPriceStream() async* {
       if (response.statusCode == 200) {
         String data = response.body;
         var jsonData = jsonDecode(data);
-        double goldPrice = double.parse(jsonData['price'].toStringAsFixed(2));
+        double goldPrice = jsonData['price'];
         yield goldPrice;
       } else {
         throw Exception('Failed to load data: ${response.statusCode}');
