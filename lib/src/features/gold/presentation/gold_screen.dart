@@ -21,7 +21,7 @@ class GoldScreen extends StatelessWidget {
               Text('Live Kurs:',
                   style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 20),
-              StreamBuilder(
+              StreamBuilder<double>(
                   stream: goldPrice,
                   builder: (context, snapshot) {
                     if (snapshot.hasData &&
