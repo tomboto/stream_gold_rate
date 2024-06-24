@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../data/fake_gold_api.dart';
+import '../data/gold_api.dart';
 
 class GoldScreen extends StatelessWidget {
   const GoldScreen({super.key});
@@ -21,31 +21,28 @@ class GoldScreen extends StatelessWidget {
               Text('Live Kurs:',
                   style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 20),
-              Center(
-                child: StreamBuilder(
-                    stream: goldPrice,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData &&
-                              snapshot.connectionState ==
-                                  ConnectionState.done ||
-                          snapshot.connectionState == ConnectionState.active) {
-                        return Text(
-                          NumberFormat.simpleCurrency(locale: 'de_DE')
-                              .format(snapshot.data),
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge!
-                              .copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
-                        );
-                      } else if (snapshot.connectionState !=
-                          ConnectionState.done) {
-                        return const CircularProgressIndicator();
-                      } else {
-                        return const Icon(Icons.error);
-                      }
-                    }),
-              ),
+              StreamBuilder(
+                  stream: goldPrice,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData &&
+                            snapshot.connectionState == ConnectionState.done ||
+                        snapshot.connectionState == ConnectionState.active) {
+                      return Text(
+                        NumberFormat.simpleCurrency(locale: 'de_DE')
+                            .format(snapshot.data),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineLarge!
+                            .copyWith(
+                                color: Theme.of(context).colorScheme.primary),
+                      );
+                    } else if (snapshot.connectionState !=
+                        ConnectionState.done) {
+                      return const CircularProgressIndicator();
+                    } else {
+                      return const Icon(Icons.error);
+                    }
+                  }),
               const SizedBox(height: 20.0),
               const Text(
                 '''Money, money, money
