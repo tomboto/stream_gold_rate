@@ -12,37 +12,40 @@ class GoldScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(context),
-              const SizedBox(height: 20),
+              const SizedBox(height: 50),
               Text('Live Kurs:',
                   style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 20),
-              StreamBuilder(
-                  stream: goldPrice,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData &&
-                            snapshot.connectionState == ConnectionState.done ||
-                        snapshot.connectionState == ConnectionState.active) {
-                      return Text(
-                        NumberFormat.simpleCurrency(locale: 'de_DE')
-                            .format(snapshot.data),
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge!
-                            .copyWith(
-                                color: Theme.of(context).colorScheme.primary),
-                      );
-                    } else if (snapshot.connectionState !=
-                        ConnectionState.done) {
-                      return const CircularProgressIndicator();
-                    } else {
-                      return const Icon(Icons.error);
-                    }
-                  })
+              Center(
+                child: StreamBuilder(
+                    stream: goldPrice,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData &&
+                              snapshot.connectionState ==
+                                  ConnectionState.done ||
+                          snapshot.connectionState == ConnectionState.active) {
+                        return Text(
+                          NumberFormat.simpleCurrency(locale: 'de_DE')
+                              .format(snapshot.data),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
+                        );
+                      } else if (snapshot.connectionState !=
+                          ConnectionState.done) {
+                        return const CircularProgressIndicator();
+                      } else {
+                        return const Icon(Icons.error);
+                      }
+                    }),
+              )
             ],
           ),
         ),
