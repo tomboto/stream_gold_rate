@@ -45,7 +45,18 @@ class GoldScreen extends StatelessWidget {
                         return const Icon(Icons.error);
                       }
                     }),
-              )
+              ),
+              const SizedBox(height: 20.0),
+              const Text(
+                '''Money, money, money
+              Must be funny
+              In a rich man's world''',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
             ],
           ),
         ),
